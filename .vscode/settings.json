@@ -1,0 +1,8 @@
+{
+    "python.autoComplete.extraPaths": [
+        "./services/trade_producer/src"
+    ],
+    "python.analysis.extraPaths": [
+        "./services/trade_producer/src"
+    ]
+}

@@ -16,5 +16,8 @@ RUN poetry install
 # Set the environment variable for the broker address
 ENV BROKER_ADDRESS=redpanda-0:9092
 
+# Set the environment variable to not buffer stdout
+ENV PYTHONUNBUFFERED=1
+
 # Command to run the application
-CMD ["poetry", "run", "python", "services/trade_producer/src/MdProducer.py"]
+CMD ["poetry", "run", "python", "src/MdProducer.py"]

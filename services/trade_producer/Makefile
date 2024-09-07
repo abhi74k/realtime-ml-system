@@ -6,6 +6,7 @@ BROKER_ADDRESS = redpanda-0:9092
 # Build the Docker image
 build:
 	docker build -t $(IMAGE_NAME) .
+	
 # Run the Docker container
 run: clean build
 	docker run --name $(CONTAINER_NAME) --network redpanda_network $(IMAGE_NAME)

@@ -1,7 +1,7 @@
 import websocket
 import json
 from datetime import datetime
-
+from loguru import logger
 
 class KrakenMdSubscriber:
 
@@ -90,20 +90,20 @@ class KrakenMdSubscriber:
                     self.on_trade_message(symbol, price, qty, side)
 
     def on_error(self, ws, error):
-        print(f"Error: {error}")
+        logger.error(f"Error: {error}")
 
     def on_close(self, ws, close_status_code, close_msg):
-        print("### closed ###")
+        logger.info("### closed ###")
 
     def on_open(self, ws):
-        print("Opened connection")
-
+        logger.info("Opened connection..")
+    
         if self.subscribe_l1:
-            print("Subscribing to L1")
+            logger.info("Subscribing to L1")
             ws.send(json.dumps(self.l1_subscription_message))
 
         if self.subscribe_trade:
-            print("Subscribing to Trades")
+            logger.info("Subscribing to Trades")
             ws.send(json.dumps(self.trade_subscription_message))
 
         

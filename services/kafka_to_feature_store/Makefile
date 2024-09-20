@@ -1,6 +1,6 @@
 # Define variables
-IMAGE_NAME = trade_producer_image
-CONTAINER_NAME = trade_producer_container
+IMAGE_NAME = kafka_to_feature_store_image
+CONTAINER_NAME = kafka_to_feature_store_container
 BROKER_ADDRESS = redpanda-0:9092
 
 # Build the Docker image
@@ -9,7 +9,7 @@ build:
 	
 # Run the Docker container
 run: clean build
-	docker run --name $(CONTAINER_NAME) --network redpanda_network $(IMAGE_NAME) --env-file .env
+	docker run --name $(CONTAINER_NAME) --network redpanda_network --env-file .env $(IMAGE_NAME) 
 
 # Stop the Docker container
 stop:

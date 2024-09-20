@@ -26,8 +26,8 @@ Go to the `docker-compose` directory and run the following commands
 
 | Command                        | Description                    |
 |-------------------------------|--------------------------------|
-| `make start`                  | Starting RedPanda              |
-| `make stop`                   | Stopping RedPanda              |
+| `make start-redpanda`                  | Starting RedPanda              |
+| `make stop-redpanda`                   | Stopping RedPanda              |
 
 
 ### Trade Producer

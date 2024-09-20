@@ -1,10 +1,12 @@
 {
     "python.autoComplete.extraPaths": [
         "./services/trade_producer/src",
-        "./services/trade_to_ohlc/src"
+        "./services/trade_to_ohlc/src",
+        "./services/kafka_to_feature_store/src"
     ],
     "python.analysis.extraPaths": [
         "./services/trade_producer/src",
-         "./services/trade_to_ohlc/src"
+        "./services/trade_to_ohlc/src",
+        "./services/kafka_to_feature_store/src"
     ]
 }

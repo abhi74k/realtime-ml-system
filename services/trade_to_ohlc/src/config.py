@@ -1,6 +1,9 @@
 from pydantic_settings import BaseSettings
 import os
 from dotenv import load_dotenv, find_dotenv
+from loguru import logger
+
+logger.info(f"find_dotenv(): {find_dotenv()}")
 
 load_dotenv(find_dotenv())
 

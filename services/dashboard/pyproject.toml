@@ -6,11 +6,9 @@ authors = ["Abhinav <abhi74k@stanford.edu>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-quixstreams = "^2.10.0"
-websocket-client = "^1.8.0"
-loguru = "^0.7.2"
-pydantic-settings = "^2.5.2"
+python = ">=3.10,<3.13"
+streamlit = "^1.38.0"
+hopsworks = "^3.7.0"
 
 
 [build-system]

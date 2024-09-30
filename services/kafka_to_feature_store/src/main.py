@@ -23,6 +23,7 @@ def kafka_to_feature_store(
         api_key: str,
         batch_size: int,
         enable_logging: bool = False,
+        flush_interval_secs: int = 0,
         is_online: bool = True
 ):
     app = Application(
@@ -47,17 +48,19 @@ def kafka_to_feature_store(
         consumer.subscribe(topics=[kafka_topic_name])
 
         buffer = []
+        prev_flush_time_secs = 0
 
         while True:
             msg = consumer.poll(1)
+            curr_secs = int(time.time())
 
             if msg is None:
 
-                curr_secs = int(time.time())
-                if(flush_time_secs is not None and len(buffer) > 0 and curr_secs - flush_time_secs > 60):
+                if(flush_time_secs is not None and len(buffer) > 0 and curr_secs - prev_flush_time_secs > flush_interval_secs):
                     logger.info("Flushing buffer due to inactivity")
                     flush_buffer(buffer, writer)
                     buffer = []
+                    prev_flush_time_secs  = curr_secs
                 continue
 
             elif msg.error():
@@ -69,21 +72,19 @@ def kafka_to_feature_store(
             value_str = value.decode('utf-8') # Convert to string
             value_dict= json.loads(value_str) # Convert to dict
 
+            if enable_logging:
+                logger.info(f"Received message: {value_dict}, buffer size: {len(buffer)}")
+
             # Remove the 'value' key
             del value_dict['value']
 
-            if enable_logging:
-                logger.info(f"Received message: {value_dict}")
-
-            if len(buffer) < batch_size:
+            if len(buffer) < batch_size or (curr_secs - prev_flush_time_secs) < flush_interval_secs:
                 buffer.append(value_dict)
             else:
                 logger.info("Batch full. Flushing buffer")
-                flush_time_secs = int(time.time())
                 flush_buffer(buffer, writer)
-                time.sleep(120)
                 buffer = []
-
+                prev_flush_time_secs = curr_secs
                 # Store the offset of the processed message on the Consumer
                 # for the auto-commit mechanism.
                 # It will send it to Kafka in the background.
@@ -129,5 +130,6 @@ if __name__ == "__main__":
        config.api_key,
        config.batch_size,
        config.enable_logging,
+       config.flush_interval_secs,
        is_online
     )

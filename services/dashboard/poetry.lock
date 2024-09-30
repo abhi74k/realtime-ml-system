@@ -290,6 +290,26 @@ files = [
 ]
 
 [[package]]
+name = "bokeh"
+version = "2.4.3"
+description = "Interactive plots and applications in the browser from Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "bokeh-2.4.3-py3-none-any.whl", hash = "sha256:104d2f0a4ca7774ee4b11e545aa34ff76bf3e2ad6de0d33944361981b65da420"},
+    {file = "bokeh-2.4.3.tar.gz", hash = "sha256:ef33801161af379665ab7a34684f2209861e3aefd5c803a21fbbb99d94874b03"},
+]
+
+[package.dependencies]
+Jinja2 = ">=2.9"
+numpy = ">=1.11.3"
+packaging = ">=16.8"
+pillow = ">=7.1.0"
+PyYAML = ">=3.10"
+tornado = ">=5.1"
+typing-extensions = ">=3.10.0"
+
+[[package]]
 name = "boto3"
 version = "1.35.29"
 description = "The AWS SDK for Python"
@@ -3921,4 +3941,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "2621f74640ec4812f5af4a086bfd5276a7fba0c616cdcc39c93a35331ccfd875"
+content-hash = "49ffae03f6fe53d933a327cb06875bd82a9dac69555a8b1c4638969cea75aa81"

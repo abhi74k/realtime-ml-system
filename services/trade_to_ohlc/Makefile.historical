@@ -1,15 +1,16 @@
 # Define variables
-IMAGE_NAME = kafka_to_feature_store_image
-CONTAINER_NAME = kafka_to_feature_store_container
+IMAGE_NAME = trade_to_ohlc_image
+CONTAINER_NAME = trade_to_ohlc_container
 BROKER_ADDRESS = redpanda-0:9092
 
 # Build the Docker image
 build:
 	docker build -t $(IMAGE_NAME) .
-	
+
 # Run the Docker container
+
 run: clean build
-	docker run --name $(CONTAINER_NAME) --network redpanda_network --env-file .env $(IMAGE_NAME) 
+	docker run --name $(CONTAINER_NAME) --network redpanda_network --env-file .env --env INPUT_TOPIC_NAME=trades --env OUTPUT_TOPIC_NAME=ohlc_10s $(IMAGE_NAME)
 
 # Stop the Docker container
 stop:

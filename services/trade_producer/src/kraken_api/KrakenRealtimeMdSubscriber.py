@@ -1,3 +1,4 @@
+import pytz
 import websocket
 import json
 from datetime import datetime
@@ -48,14 +49,13 @@ class KrakenRealtimeMdSubscriber:
             for item in data_list:
                 symbol = item['symbol']
                 side = item['side']
-                price = item['price']
-                qty = item['qty']
-
-                # Convert timestamp to epoch
                 timestamp_str = item['timestamp']
-                timestamp_dt = datetime.strptime(timestamp_str, "%Y-%m-%dT%H:%M:%S.%fZ")
+                logger.info(f"Timestamp: {timestamp_str}")
+                timestamp_dt = datetime.strptime(timestamp_str, "%Y-%m-%dT%H:%M:%S.%fZ").replace(tzinfo=pytz.UTC)
                 time_dbl = timestamp_dt.timestamp()
                 epoch_time_ms = int(time_dbl * 1e3)
+                price = item['price']
+                qty = item['qty']
 
                 if self.trace:
                     print(f"Trade - Symbol: {symbol}, Price: {price}, Qty: {qty}, Side: {side}, TimeMs: {epoch_time_ms}")

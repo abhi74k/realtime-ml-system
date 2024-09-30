@@ -19,7 +19,7 @@ if __name__ == "__main__":
     tickers = config.tickers
     mode = config.mode
 
-    topic_name = 'trades'
+    topic_name = config.topic_name
     if mode == 'historical':
         from_dt_str = config.from_time
 
@@ -37,10 +37,10 @@ if __name__ == "__main__":
 
     elif mode == 'realtime':
         logger.info(f"Fetching realtime data for {tickers}")
-        producer = RedPandaMdProducer(broker_address=broker_address, topic_name='tradesv2')
+        producer = RedPandaMdProducer(broker_address=broker_address, topic_name=topic_name)
         subscriber = KrakenRealtimeMdSubscriber(tickers=tickers,
                                                 on_trade_message=producer.on_trade,
-                                                trace=False)
+                                                trace=True)
         subscriber.run_forever()
 
     else:

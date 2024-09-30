@@ -32,6 +32,7 @@ class HopsworksWriter:
             version=self.feature_group_version,
             description=self.feature_group_description,
             primary_key=['symbol', 'timestamp_ms'],
-            event_time='timestamp_ms'
+            event_time='timestamp_ms',
+            online_enabled=self.is_online
         )
         feature_group.insert(value_df, write_options={"start_offline_materialization": not self.is_online})

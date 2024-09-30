@@ -21,5 +21,6 @@ class Config(BaseSettings):
 
     online_or_offline: str = os.getenv("ONLINE_OR_OFFLINE", "online")
     batch_size: int = os.getenv("BATCH_SIZE")
+    flush_interval_secs: int = os.getenv("FLUSH_INTERVAL_SECS")
 
 config = Config()

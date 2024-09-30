@@ -494,6 +494,17 @@ files = [
 cli = ["click (>=5.0)"]
 
 [[package]]
+name = "pytz"
+version = "2024.2"
+description = "World timezone definitions, modern and historical"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pytz-2024.2-py2.py3-none-any.whl", hash = "sha256:31c7c1817eb7fae7ca4b8c7ee50c72f93aa2dd863de768e1ef4245d426aa0725"},
+    {file = "pytz-2024.2.tar.gz", hash = "sha256:2aa355083c50a0f93fa581709deac0c9ad65cca8a9e9beac660adcbd493c798a"},
+]
+
+[[package]]
 name = "quixstreams"
 version = "2.11.0"
 description = "Python library for building stream processing applications with Apache Kafka"
@@ -773,4 +784,4 @@ dev = ["black (>=19.3b0)", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "af79f15a368598b39d10637ad5ba73b27e134df1028f2c0d0f9e055e26524193"
+content-hash = "18f68f486cc15e931b335957c3954963e0333be822f2e7b01481deed890e46d0"

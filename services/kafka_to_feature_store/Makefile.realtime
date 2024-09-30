@@ -9,11 +9,10 @@ build:
 
 # Run the Docker container
 run: clean build
-	docker run --name $(CONTAINER_NAME) --network redpanda_network --env-file .env --env ONLINE_OR_OFFLINE=offline \
-	--env KAFKA_TOPIC_NAME=ohlc_10s --env FEATURE_GROUP_NAME=ohlc_10s_1 --env FEATURE_GROUP_VERSION=1 --env BATCH_SIZE=1000 \
-	--env FLUSH_INTERVAL_SECS=120 \
+	docker run --name $(CONTAINER_NAME) --network redpanda_network --env-file .env --env ONLINE_OR_OFFLINE=online \
+	--env=KAFKA_TOPIC_NAME=ohlc_10s_live --env=FEATURE_GROUP_NAME=ohlc_10s_realtime --env=FEATURE_GROUP_VERSION=1 \
+	--env BATCH_SIZE=10 --env FLUSH_INTERVAL_SECS=120 \
 	$(IMAGE_NAME)
-
 
 # Stop the Docker container
 stop:

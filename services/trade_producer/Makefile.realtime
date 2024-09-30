@@ -1,15 +1,15 @@
 # Define variables
-IMAGE_NAME = trade_to_ohlc_image
-CONTAINER_NAME = trade_to_ohlc_container
+IMAGE_NAME = trade_producer_image
+CONTAINER_NAME = trade_producer_container
 BROKER_ADDRESS = redpanda-0:9092
 
 # Build the Docker image
 build:
 	docker build -t $(IMAGE_NAME) .
-	
+
 # Run the Docker container
 run: clean build
-	docker run --name $(CONTAINER_NAME) --network redpanda_network --env-file .env $(IMAGE_NAME)
+	docker run --name $(CONTAINER_NAME) --network redpanda_network --env-file .env --env MODE=realtime --env TOPIC_NAME=trades_live --env TZ="America/New_York" $(IMAGE_NAME)
 
 # Stop the Docker container
 stop:
